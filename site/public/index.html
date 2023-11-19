@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>WheelKnights</title>
+</head>
+
+<body>
+<!-- Header -->
+<div class="header">
+    <div class="container">
+        <h1>WheelKnights</h1>
+            <ul class="navbar">
+                <li><a href="diecasthistory.html">História do Diecast</a></li>
+                <li><a href="signin.html">Login</a></li>
+                <li><a href="signup.html">Cadastre-se</a></li>
+            </ul>
+    </div>
+</div>
+
+<!-- Banner -->
+<div class="banner">
+  <div class="container">
+    <p>Onde cada <b>miniatura</b> torna-se <b>realidade</b>.</p>
+  </div>
+</div>
+
+<!-- Conteúdo -->
+<div class="content">
+    <h1>Fanartes</h1>
+    <h2>As fanartes mais IRADAS dos nossos Users nessa semana</h2>
+    <div class="container">
+        <div id="image_container"></div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <div class="container">
+        <p>Todos os direitos reservados. © - 2023</p>
+    </div>
+</div>
+
+</body>
+
+</html>
+
+<script>
+    
+var imageContainer = image_container;
+var images = [
+    "assets/img/art1.jpg",
+    "assets/img/art2.jpg",
+    "assets/img/art3.jpg",
+    "assets/img/art4.jpg",
+    "assets/img/art5.jpg",
+    "assets/img/art6.jpg",
+    "assets/img/art7.jpg",
+    "assets/img/art8.jpg",
+    "assets/img/art9.jpg",
+    "assets/img/art10.jpg"
+];
+
+var currentPosition = 0;
+
+function loopImage(){
+
+        var imageUrl = images[currentPosition];
+        imageContainer.style.backgroundImage = `url(${imageUrl})`;
+
+        currentPosition++;
+        if(currentPosition >= images.length){
+            currentPosition = 0;
+        }
+    }
+
+setInterval(loopImage, 1500)
+
+</script>

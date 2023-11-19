@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Cadastro - WK</title>
+</head>
+<body>
+    <div class="banner_signup"></div>
+    <div class="left_solid">
+        <h1><a href="index.html">WheelKnights</a></h1>
+        <div class="signup_form">
+            
+                <input type="text" id="userName" placeholder="Username" class="required" oninput="nameValidate()">
+                <input type="email" name="" id="email" placeholder="Email" class="required" oninput="emailValidate()">
+                <input type="password" id="senha" placeholder="Senha" class="required" oninput="passwordValidate()">
+                <div> 
+                    <button onclick="cadastrar()">Cadastrar-se</button>
+                </div>
+            
+        </div>
+    </div>    
+</body>
+</html>
+
+<script>
+
+const fields = document.querySelectorAll('.required');
+const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+function setError(index){
+    fields[index].style.border = '2px solid red';
+}
+
+function removeError(index){
+    fields[index].style.border = '';
+}
+
+function nameValidate(){
+    if(fields[0].value.length < 3){
+        setError(0);
+    } else{
+        removeError(0)
+    }
+}
+
+function emailValidate(){
+    if(!emailRegex.test(fields[1].value)){
+        setError(1);
+    } else{
+        removeError(1);
+    }
+}
+
+function passwordValidate(){
+    if(fields[2].value.length < 8){
+        setError(2);
+    } else{
+        removeError(2);
+    }
+}
+
+function cadastrar(){
+    var userNameVar = userName.value;
+    var emailVar = email.value;
+    var senhaVar = senha.value;
+
+    if(
+        userNameVar == "" ||
+        emailVar == "" ||
+        senhaVar == ""
+    ) {
+        alert("Nenhum dos campos pode estar vazio.");
+
+        return false;
+    }
+    else if (
+        userNameVar.length < 3 ||
+        !emailRegex.test(emailVar) ||
+        senhaVar.length < 8
+    ) {
+        alert("Valores preenchidos incorretamente.");
+
+        return false;
+    } 
+
+    fetch("user/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            userNameServer: userNameVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar
+        }),
+    })
+    .then(function (resposta) {
+        console.log("resposta: ", resposta);
+        
+        if (resposta.ok) {
+            alert("Cadastro realizado com sucesso...");
+    
+                window.location = "signin.html";        
+        } else{
+            throw "Erro ao tentar cadastrar.";
+        }
+    })
+    .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false;
+}
+</script>

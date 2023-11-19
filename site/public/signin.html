@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Login - WK</title>
+</head>
+<body>
+    <div class="banner_signin"></div>
+    <div class="left_solid">
+        <h1><a href="index.html">WheelKnights</a></h1>
+        <div class="signin_form">
+   
+                <input type="text" id="userName" placeholder="Username">
+                <input type="password" id="senha" placeholder="Senha">
+                <div> 
+                    <button onclick="entrar()">Logar</button>
+                </div>
+
+        </div>
+    </div>    
+</body>
+</html>
+
+<script>
+
+function entrar(){
+    var userNameVar = userName.value;
+    var senhaVar = senha.value;
+
+    if (userNameVar == "" || senhaVar == ""){
+        alert("Nenhum campo deve estar em branco.")
+        return false;
+    }
+
+    console.log(`FORM LOGIN: ${userNameVar}`);
+    console.log(`FORM SENHA: ${senhaVar}`);
+
+    fetch("user/autenticar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            userNameServer: userNameVar,
+            senhaServer: senhaVar
+        })
+    }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+                sessionStorage.EMAIL_USUARIO = json.email;
+                sessionStorage.USER_NAME = json.userName;
+                sessionStorage.ID_USUARIO = json.id;
+
+                setTimeout(function () {
+                    window.location = "feed.html";
+                }, 1000);
+            });
+        } else {
+            resposta.json().then(json => {
+            // Exibe o alerta com a mensagem de erro
+            alert(json.error);
+            });
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+    return false;
+}
+
+</script>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/feed.css">
+    <title>Registro de Miniaturas - WK</title>
+</head>
+<body>
+
+    <nav class="main_menu">
+
+        <div class="menu_links">
+
+            <h1 class="brand_font">WheelKnights</h1>
+            <!--<img src="../assets/img/WheelKnights.png" alt="logo WheelKnights" class="brand_logo">-->  
+            <input type="text" name="ms" class="search_top" placeholder="Pesquisar">
+
+            <div class="menu_icons">
+
+                <img src="assets/img/icon-feed-white.png" alt="feed" class="icon" onclick="goFeed()">
+                <img src="assets/img/icon-register.png" alt="registrar miniaturas" class="icon">
+                <img src="assets/img/foto-perfil.png" alt="foto de perfil" class="icon profile_user">
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <section>
+
+        <div class="register_content">
+            
+            <h1>Registro de Miniaturas</h1><br>
+
+                <input type="text" placeholder="Modelo" class="inputForm" id="modelo">
+
+                <select id="marca">
+
+                    <option disabled selected hidden>Selecione uma marca</option>
+                    <option value="1">Hot Wheels</option>
+                    <option value="2">Matchbox</option>
+                    <option value="3">Kyosho</option>
+                    <option value="4">Tomy</option>
+                    <option value="5">Siku</option>
+                    <option value="6">Jada</option>
+                    <option value="7">Johnny Lightning</option>
+                    <option value="8">Outro</option>
+
+                </select>
+  
+                <select id="tematica">
+
+                    <option disabled selected hidden value="0">Selecione o tema da sua miniatura</option>
+                    <option value="1">Os Simpsons</option>
+                    <option value="2">Batman</option>
+                    <option value="3">Os Flintstones</option>
+                    <option value="4">Scooby-Doo!</option>
+                    <option value="15">Nenhum</option>
+
+                </select>
+
+                <select id="tipoVeiculo">
+
+                    <option disabled selected hidden>Selecione o tipo de veículo</option>
+                    <option value="Carro">Carro</option>
+                    <option value="Moto">Moto</option>
+                    <option value="Caminhão">Caminhão</option>
+                    <option value="Militar">Militar</option>
+                    <option value="Barco">Barco</option>
+                    <option value="Avião">Avião</option>
+                    <option value="Outro">Outro</option>
+
+                </select>
+
+                <input type="number" placeholder="Preço de Compra" class="inputForm" id="valorCompra">
+
+                <label for="uploadImage">Clique e escolha uma imagem de sua miniatura</label>
+                <input type="file" name="imagem" id="uploadImage">
+
+                <button onclick="cadastrar()">Registrar</button>
+
+        </div>
+        
+    </section>
+</body>
+</html>
+
+<script>
+
+function goFeed(){
+    const feed = "feed.html";
+
+    window.location.href = feed;
+}
+
+function cadastrar(){
+    var marcaVar = marca.value;
+    var modeloVar = modelo.value;
+    var tematicaVar = tematica.value;
+    var tipoVeiculoVar = tipoVeiculo.value;
+    var valorCompraVar = Number(valorCompra.value);
+
+    if (
+        marcaVar == "" ||
+        modeloVar == "" ||
+        tipoVeiculoVar == ""
+    ) {
+        alert("Marca, modelo e Tipo do veículo são obrigatórios")
+
+        return false;
+    }
+
+    if (tematicaVar == "0"){
+        tematicaVar = "15";
+    }
+
+    fetch("registerMiniature/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            marcaServer: marcaVar,
+            modeloServer: modeloVar,
+            tematicaServer: tematicaVar,
+            tipoVeiculoServer: tipoVeiculoVar,
+            valorCompraServer: valorCompraVar
+        }),
+    })
+    .then(function(resposta){
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            alert("Miniatura cadastrada com sucesso!");
+        } else {
+            throw "Houve um erro ao tentar realizar o cadastro da miniatura.";
+        }
+    })
+    .catch(function(resposta){
+        console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false
+}
+
+</script>

@@ -1,0 +1,286 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*:focus{
+  outline: none;
+}
+
+.header {
+  background-color: #32B9CD;
+  width: 100%;
+  height: 100px;
+  border-bottom: orange 4px solid;
+}
+
+.header .container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+  margin: 0 10% 0;
+  font-family:'Segoe UI';
+}
+
+.header .container h1{
+  color: white;
+  margin: 0;
+}
+
+.header .container h1 a{
+  text-decoration: none;
+  color: white;
+}
+
+.header .container .navbar {
+  list-style: none;
+}
+
+.header .container .navbar li{
+  display: inline;
+  margin: 0 15px;
+}
+
+.header .container .navbar li a{
+  color: white;
+  text-decoration: none;
+}
+
+.banner{
+  width: 100%;
+  height: 500px;
+  background-color: orange;
+  background-image: url(../assets/img/banner.jpeg);
+  border-bottom: orange 4px solid;
+}
+
+.banner .container{ 
+  width: 80;
+  height: 100%;
+  margin: 0 20%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.banner .container p{
+  margin: 0;
+  color: white;
+  font-size: 32px;
+  width: 40%;
+}
+
+.banner .container p b{
+  color: #32B9CD;
+}
+
+.content{
+  width: 100%;
+  height: 500px;
+  background-color: aliceblue;
+}
+
+.content h1{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 0;
+  color: #32B9CD;
+}
+
+.content h2{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: orange;
+  font-size: 20px;
+}
+
+.content .container{
+  width: 100;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content .container #image_container {
+width: 350px;
+height: 350px;
+margin-top: -100px;
+background-image: url('../assets/img/art10.jpg');
+background-size: cover; 
+background-position: center;
+border-radius: 15px;
+}
+
+.footer{
+  width: 100%;
+  height: 100px;
+  background-color: #32B9CD;
+}
+
+.footer .container{
+  width: 80;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; 
+}
+
+/*Signup*/
+.banner_signup{
+  float: right;
+  width: 75%;
+  height: 100vh;
+  background-image: url(../assets/img/banner-signup.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+.left_solid{
+  float: right;
+  width: 25%;
+  height: 100vh;
+  background-color: #32B9CD;
+  display: flex;
+  justify-content: center;
+  font-family:'Segoe UI';
+  position: absolute;
+}
+
+.left_solid h1 a{
+  text-decoration: none;
+  color: white;
+}
+
+.signup_form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: relative; 
+  top: 50%;
+  transform: translateY(-50%);
+  left: 50;
+  width: 70%;
+  height: 40%;
+}
+
+.signup_form input{
+  margin: 10% 0;
+  border-color: white;
+  border-radius: 5px;
+  font-family: 'Times New Roman';
+  font-size: large;
+}
+
+.signin_form div{
+  display: flex;
+  justify-content: center;
+}
+
+div button{
+  background-color: #32B9CD;
+  border-color: #32B9CD;
+  border-radius: 5px;
+  height: 30px;
+  font-family: 'Times New Roman';
+  font-size: large;
+  color: white;
+}
+
+/*Signin*/
+.banner_signin{
+  float: right;
+  width: 75%;
+  height: 100vh;
+  background-image: url(../assets/img/up.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+.left_solid{
+  float: right;
+  width: 25%;
+  height: 100vh;
+  background-color: #32B9CD;
+  display: flex;
+  justify-content: center;
+  font-family:'Segoe UI';
+  position: relative;
+}
+
+.left_solid h1 a{
+  text-decoration: none;
+  color: white;
+}
+
+.signin_form form{
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  position: absolute; 
+  top: 50%;
+  transform: translateY(-50%);
+  left: 50;
+  width: 70%;
+  height: 28%;
+}
+
+.signin_form form input{
+  margin: 10% 0;
+  border-color: white;
+  border-radius: 5px;
+  font-family: 'Times New Roman';
+  font-size: large;
+}
+
+form div{
+  display: flex;
+  justify-content: center;
+}
+
+div button{
+  background-color: #32B9CD;
+  border-color: #32B9CD;
+  border-radius: 5px;
+  height: 30px;
+  font-family: 'Times New Roman';
+  font-size: large;
+  color: white;
+}
+
+.text{
+  text-align: justify;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.text h1{
+  color: orange;
+}
+
+.text h2{
+  color: #32B9CD;
+}
+
+.text p{
+  font-size: larger;
+  font-family: 'Times Nem Roman';
+}
+
+.text span{
+  font-size: small;
+  font-family:'Times New Roman';
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
