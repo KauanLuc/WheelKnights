@@ -11,22 +11,25 @@ function autenticar(req, res) {
     }
 
     userModel.autenticar(userName, senha)
-        .then(function (resultadoAutenticar) {
-            console.log(`Resultados encontrados: ${resultadoAutenticar.length}`);
+    .then(function (resultadoAutenticar) {
+        console.log(`Resultados encontrados: ${resultadoAutenticar}`);
 
-            if (resultadoAutenticar.length === 1) {
-                res.status(200).json({ message: "Login bem-sucedido" });
-            } else if (resultadoAutenticar.length === 0) {
-                res.status(403).json({ error: "Username e/ou senha inválido(s)" });
-            } else {
-                res.status(403).json({ error: "Mais de um usuário com o mesmo login" });
-            }
-        })
-        .catch(function (erro) {
-            console.log(erro);
-            console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-            res.status(500).json({ error: "Erro interno do servidor" });
-        });
+        if (resultadoAutenticar) {
+            res.status(200).json({
+                message: "Login bem-sucedido",
+                idUsuario: resultadoAutenticar.idUsuario,
+                username: resultadoAutenticar.username,
+                email: resultadoAutenticar.email
+            });
+        } else {
+            res.status(403).json({ error: "Username e/ou senha inválido(s)" });
+        }
+    })
+    .catch(function (erro) {
+        console.log(erro);
+        console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    });
 }
 
 // Restante do seu código...

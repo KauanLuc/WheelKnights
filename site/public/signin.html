@@ -55,13 +55,20 @@ function entrar(){
             resposta.json().then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
-                sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.USER_NAME = json.userName;
-                sessionStorage.ID_USUARIO = json.id;
+                console.log("Resposta do servidor:", json);
 
-                setTimeout(function () {
-                    window.location = "feed.html";
-                }, 1000);
+                if(json.idUsuario) {
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.USER_NAME = json.userName;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+                    sessionStorage.MINIATURAS = JSON.stringify(json.miniaturas);
+
+                    setTimeout(function () {
+                        window.location.href = `feed.html?idUsuario=${json.idUsuario}`;
+                    }, 1000);
+                } else {
+                    alert("Erro: ID do usuário não encontrado na resposta do servidor.");
+                }
             });
         } else {
             resposta.json().then(json => {

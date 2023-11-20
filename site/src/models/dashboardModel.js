@@ -40,6 +40,12 @@ function miniaturaMaisBarata(idUsuario) {
     return database.executar(instrucao);
 }
 
+/*function marcaFavorita(idUsuario){
+    var instrucao = `
+        SELECT 
+    `;
+}*/
+
 module.exports = {
     mostrarColecao,
     qtdMiniaturas,

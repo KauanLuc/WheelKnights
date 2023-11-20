@@ -6,7 +6,22 @@ function autenticar(userName, senha) {
         SELECT idUsuario, username, email FROM usuario WHERE userName = '${userName}' AND senha = '${senha}';
     `;
     console.log(`Executando a instrução SQL: \n ${instrucao}`);
-    return database.executar(instrucao);
+    
+    return database.executar(instrucao)
+        .then(result => {
+            // Se houver algum resultado, retorna os dados do usuário incluindo o ID
+            if (result.length > 0) {
+                const usuario = result[0];
+                return {
+                    idUsuario: usuario.idUsuario,
+                    username: usuario.username,
+                    email: usuario.email
+                };
+            } else {
+                // Se não houver resultados, retorna null
+                return null;
+            }
+        });
 }
 
 function cadastrar(userName, email, senha) {

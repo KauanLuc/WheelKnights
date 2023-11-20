@@ -378,6 +378,32 @@ Então, vale a pena a customização de miniaturas Diecast? A resposta é subjet
 
 <script>
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Obter o ID do usuário do URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const idUsuario = urlParams.get('idUsuario');
+
+    // Fazer algo com o ID do usuário, se necessário
+    if (idUsuario) {
+        console.log("ID do Usuário:", idUsuario);
+
+        // Se necessário, fazer uma solicitação ao servidor para obter detalhes do usuário com base no ID
+        fetch(`api/usuario/${idUsuario}`)
+            .then(response => response.json())
+            .then(usuario => {
+                // Fazer algo com os detalhes do usuário obtidos do servidor
+                console.log("Detalhes do Usuário:", usuario);
+            })
+            .catch(error => console.error('Erro ao obter detalhes do usuário:', error));
+    } else {
+        console.log("ID do Usuário não está presente na URL.");
+        // Talvez redirecione para uma página de erro ou tome alguma ação apropriada.
+    }
+});
+
+// Resto do seu código JavaScript...
+
+
 function goRegisterMiniature(){
     const registerMiniature = "registerminiature.html";
 
