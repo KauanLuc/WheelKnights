@@ -4,9 +4,9 @@ use wheelknights;
 
 create table usuario(
 idUsuario int primary key auto_increment,
-userName varchar(45),
-email varchar(45),
-senha varchar(45)
+userName varchar(45) not null unique,
+email varchar(45) not null unique,
+senha varchar(45) not null
 );
 
 create table colecao(
@@ -42,5 +42,3 @@ foreign key (fkMarca) references marca(idMarca),
 foreign key (fkTematica) references tematica(idTematica),
 foreign key (fkTipoVeiculo) references tipoVeiculo(idTipoVeiculo)
 );
-
-
