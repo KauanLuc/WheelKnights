@@ -8,10 +8,10 @@ function buscarMiniaturasporUsuario(idUsuario) {
     return database.executar(instrucao);
 }
 
-function cadastrar(marca, modelo, tematica, tipoVeiculo, valorCompra) {
+function cadastrar(colecao, marca, modelo, tematica, tipoVeiculo, valorCompra) {
     var instrucao = `
-        INSERT INTO miniatura (fkMarca, modelo, fkTematica, tipoVeiculo, valorCompra)
-        VALUES ('${marca}', '${modelo}', '${tematica}', '${tipoVeiculo}', '${valorCompra}');
+        INSERT INTO miniatura (fkColecao, fkMarca, modelo, fkTematica, fkTipoVeiculo, valorCompra)
+        VALUES ('${colecao}', '${marca}', '${modelo}', '${tematica}', '${tipoVeiculo}', '${valorCompra}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

@@ -89,31 +89,30 @@
 
 <script>
 
-function goFeed(){
-    const feed = "feed.html";
+const urlParams = new URLSearchParams(window.location.search);
+const idUsuario = urlParams.get('idUsuario');
 
-    window.location.href = feed;
+function goFeed(){
+
+    window.location.href = `feed.html?idUsuario=${idUsuario}`;
 }
 
 function cadastrar(){
-    var marcaVar = marca.value;
+    var fkColecaoVar = idUsuario;
+    var fkMarcaVar = Number(marca.value);
     var modeloVar = modelo.value;
-    var tematicaVar = tematica.value;
-    var tipoVeiculoVar = tipoVeiculo.value;
+    var fkTematicaVar = Number(tematica.value);
+    var fkTipoVeiculoVar = Number(tipoVeiculo.value);
     var valorCompraVar = Number(valorCompra.value);
 
     if (
-        marcaVar == "" ||
+        fkMarcaVar == "" ||
         modeloVar == "" ||
-        tipoVeiculoVar == ""
+        fkTipoVeiculoVar == ""
     ) {
         alert("Marca, modelo e Tipo do veículo são obrigatórios")
 
         return false;
-    }
-
-    if (tematicaVar == "0"){
-        tematicaVar = "15";
     }
 
     fetch("registerMiniature/cadastrar", {
@@ -122,10 +121,11 @@ function cadastrar(){
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            marcaServer: marcaVar,
+            colecaoServer: fkColecaoVar,
+            marcaServer: fkMarcaVar,
             modeloServer: modeloVar,
-            tematicaServer: tematicaVar,
-            tipoVeiculoServer: tipoVeiculoVar,
+            tematicaServer: fkTematicaVar,
+            tipoVeiculoServer: fkTipoVeiculoVar,
             valorCompraServer: valorCompraVar
         }),
     })

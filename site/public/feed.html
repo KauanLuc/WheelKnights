@@ -405,9 +405,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function goRegisterMiniature(){
-    const registerMiniature = "registerminiature.html";
+    const urlParams = new URLSearchParams(window.location.search);
+    const idUsuario = urlParams.get('idUsuario');
 
-    window.location.href = registerMiniature;
+    window.location.href = `registerminiature.html?idUsuario=${idUsuario}`;
 }
 
 function liked(clickedElement) {

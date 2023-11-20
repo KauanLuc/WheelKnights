@@ -17,6 +17,7 @@ function buscarMiniaturasporUsuario(req, res) {
 }
 
 function cadastrar (req, res) {
+    var colecao = req.body.colecaoServer;
     var marca = req.body.marcaServer;
     var modelo = req.body.modeloServer;
     var tematica = req.body.tematicaServer;
@@ -33,7 +34,7 @@ function cadastrar (req, res) {
         return res.status(400).send("O tipo de veículo da sua miniatura está indefinido!");
     }
 
-    registerMiniatureModel.cadastrar(marca, modelo, tematica, tipoVeiculo, valorCompra).then(function(resposta){
+    registerMiniatureModel.cadastrar(colecao, marca, modelo, tematica, tipoVeiculo, valorCompra).then(function(resposta){
         res.status(200).send("Miniatura cadastrada com sucesso");
     }).catch(function(erro){
         console.error("Erro ao cadastrar miniatura:", erro);
