@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sign.css">
     <title>Login - WK</title>
 </head>
 <body>
     <div class="banner_signin"></div>
     <div class="left_solid">
         <h1><a href="index.html">WheelKnights</a></h1>
-        <div class="signin_form">
-   
-                <input type="text" id="userName" placeholder="Username">
-                <input type="password" id="senha" placeholder="Senha">
-                <div> 
-                    <button onclick="entrar()">Logar</button>
-                </div>
-
+    </div>
+    <div class="content">
+        <h1>Login</h1>
+        <div class="form">
+            <div>
+                <input type="text" placeholder="Digite seu Username" class="inputs" id="userName">
+            </div>
+            <div>
+                <input type="password" placeholder="Digite sua Senha" class="inputs" id="senha">
+            </div>
+            <button onclick="entrar()">Logar</button>
         </div>
     </div>    
 </body>
