@@ -15,10 +15,12 @@
         <h1>Login</h1>
         <div class="form">
             <div>
-                <input type="text" placeholder="Digite seu Username" class="inputs" id="userName">
+                <input type="text" placeholder="Digite seu Username" class="inputs required" id="userName" oninput="nameValidate()">
+                <span class="span_required">Este campo é obrigatório</span>
             </div>
             <div>
-                <input type="password" placeholder="Digite sua Senha" class="inputs" id="senha">
+                <input type="password" placeholder="Digite sua Senha" class="inputs required" id="senha" oninput="passwordValidate()">
+                <span class="span_required">Este campo é obrigatório</span>
             </div>
             <button onclick="entrar()">Logar</button>
         </div>
@@ -27,13 +29,42 @@
 </html>
 
 <script>
+const fields = document.querySelectorAll('.required');
+const spans = document.querySelectorAll('.span_required');
+
+function setError(index){
+    fields[index].style.border = '2px solid red';
+    spans[index].style.display = 'block';
+}
+
+function removeError(index){
+    fields[index].style.border = '';
+    spans[index].style.display = 'none';
+}
+
+function nameValidate(){
+    if(fields[0].value.length < 3){
+        setError(0);
+    } else{
+        removeError(0)
+    }
+}
+
+function passwordValidate(){
+    if(fields[1].value.length < 8){
+        setError(1);
+    } else{
+        removeError(1);
+    }
+}
 
 function entrar(){
     var userNameVar = userName.value;
     var senhaVar = senha.value;
 
     if (userNameVar == "" || senhaVar == ""){
-        alert("Nenhum campo deve estar em branco.")
+        nameValidate();
+        passwordValidate();
         return false;
     }
 

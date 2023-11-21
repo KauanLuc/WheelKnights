@@ -82,7 +82,9 @@ function cadastrar(){
         emailVar == "" ||
         senhaVar == ""
     ) {
-        alert("Nenhum dos campos pode estar vazio.");
+        nameValidate();
+        emailValidate();
+        passwordValidate();
 
         return false;
     }
@@ -91,7 +93,9 @@ function cadastrar(){
         !emailRegex.test(emailVar) ||
         senhaVar.length < 8
     ) {
-        alert("Valores preenchidos incorretamente.");
+        nameValidate();
+        emailValidate();
+        passwordValidate();
 
         return false;
     } 
