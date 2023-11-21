@@ -3,38 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sign.css">
     <title>Cadastro - WK</title>
 </head>
 <body>
     <div class="banner_signup"></div>
     <div class="left_solid">
         <h1><a href="index.html">WheelKnights</a></h1>
-        <div class="signup_form">
-            
-                <input type="text" id="userName" placeholder="Username" class="required" oninput="nameValidate()">
-                <input type="email" name="" id="email" placeholder="Email" class="required" oninput="emailValidate()">
-                <input type="password" id="senha" placeholder="Senha" class="required" oninput="passwordValidate()">
-                <div> 
-                    <button onclick="cadastrar()">Cadastrar-se</button>
-                </div>
-            
+    </div>
+    <div class="content">
+        <h1>Cadastro</h1>
+        <div class="form">
+            <div>
+                <input type="text" placeholder="Crie seu Username" class="inputs required" id="userName" oninput="nameValidate()">
+                <span class="span_required">Username deve ter no mínimo 3 caracteres</span>
+            </div>
+            <div>
+                <input type="text" placeholder="Digite seu melhor email" class="inputs required" id="email"  oninput="emailValidate()">
+                <span class="span_required">Digite um email válido</span>
+            </div>
+            <div>
+                <input type="password" placeholder="Crie sua senha" class="inputs required" id="senha" oninput="passwordValidate()">
+                <span class="span_required">A senha deve ter no mínimo 8 caracteres</span>
+            </div>
+            <button onclick="cadastrar()">Cadastrar</button>
         </div>
-    </div>    
+    </div>
 </body>
 </html>
 
 <script>
 
 const fields = document.querySelectorAll('.required');
+const spans = document.querySelectorAll('.span_required');
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 function setError(index){
     fields[index].style.border = '2px solid red';
+    spans[index].style.display = 'block';
 }
 
 function removeError(index){
     fields[index].style.border = '';
+    spans[index].style.display = 'none';
 }
 
 function nameValidate(){
