@@ -93,7 +93,7 @@ function entrar(){
 
                 if(json.idUsuario) {
                     sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.USER_NAME = json.userName;
+                    sessionStorage.USER_NAME = userNameVar;
                     sessionStorage.ID_USUARIO = json.idUsuario;
                     sessionStorage.MINIATURAS = JSON.stringify(json.miniaturas);
 

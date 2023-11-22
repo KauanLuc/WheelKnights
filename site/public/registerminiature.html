@@ -20,6 +20,7 @@
 
                 <img src="assets/img/icon-feed-white.png" alt="feed" class="icon" onclick="goFeed()">
                 <img src="assets/img/icon-register.png" alt="registrar miniaturas" class="icon">
+                <img src="assets/img/icon-dashboard-white.png" alt="dashboard" class="icon" onclick="goDashboard()">
                 <img src="assets/img/foto-perfil.png" alt="foto de perfil" class="icon profile_user">
 
             </div>
@@ -95,6 +96,11 @@ const idUsuario = urlParams.get('idUsuario');
 function goFeed(){
 
     window.location.href = `feed.html?idUsuario=${idUsuario}`;
+}
+
+function goDashboard(){
+
+    window.location.href = `dashboard/dashboard.html?idUsuario=${idUsuario}`;
 }
 
 function cadastrar(){

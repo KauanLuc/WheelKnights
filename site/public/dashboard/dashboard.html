@@ -3,9 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/feed.css">
     <title>Document</title>
 </head>
 <body>
-    
+
+    <nav class="main_menu">
+
+        <div class="menu_links">
+
+            <h1 class="brand_font">WheelKnights</h1>
+            <!--<img src="../assets/img/WheelKnights.png" alt="logo WheelKnights" class="brand_logo">-->  
+            <input type="text" name="ms" class="search_top" placeholder="Pesquisar">
+
+            <div class="menu_icons">
+
+                <img src="../assets/img/icon-feed-white.png" alt="feed" class="icon" onclick="goFeed()">
+                <img src="../assets/img/icon-register-white.png" alt="registrar miniaturas" class="icon" onclick="goRegisterMiniature()">
+                <img src="../assets/img/icon-dashboard.png" alt="dashboard" class="icon">
+                <img src="../assets/img/foto-perfil.png" alt="foto de perfil" class="icon profile_user">
+
+            </div>
+
+        </div>
+
+    </nav>
+
 </body>
 </html>
+
+<script>
+
+const urlParams = new URLSearchParams(window.location.search);
+const idUsuario = urlParams.get('idUsuario');
+
+
+function goFeed(){
+
+    window.location.href = `../feed.html?idUsuario=${idUsuario}`;
+}
+
+function goRegisterMiniature(){
+
+    window.location.href = `../registerminiature.html?idUsuario=${idUsuario}`;
+}
+
+</script>

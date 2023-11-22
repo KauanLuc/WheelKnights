@@ -224,10 +224,6 @@ body{
     padding: 20px;
 }
 
-.likes{
-    font-weight: bold;
-}
-
 .description{
     margin: 10px 0;
     font-size: 14px;
@@ -398,7 +394,7 @@ body{
     font-weight: 500px;
 }
 
-  input[type="file"]::file-selector-button{
+  /*input[type="file"]::file-selector-button{
     display: block;
     margin-bottom: 30px;
     width: 300px;
@@ -409,7 +405,7 @@ body{
     color: rgba(0, 0, 0, 0.5);
     text-align: center;
     text-transform: capitalize;
-  }
+  }*/
 
   .register_content select option{
     font-size: 16px;

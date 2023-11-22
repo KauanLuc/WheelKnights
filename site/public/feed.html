@@ -20,6 +20,7 @@
 
                 <img src="assets/img/icon-feed.png" alt="feed" class="icon">
                 <img src="assets/img/icon-register-white.png" alt="registrar miniaturas" class="icon" onclick="goRegisterMiniature()">
+                <img src="assets/img/icon-dashboard-white.png" alt="dashboard" class="icon" onclick="goDashboard()">
                 <img src="assets/img/foto-perfil.png" alt="foto de perfil" class="icon profile_user">
 
             </div>
@@ -53,7 +54,7 @@
                             <img src="assets/img/logokingofdiecast.png" alt="">
 
                         </div>
-                        <p class="user_name">king_of_diecast</p>
+                        <p class="user_name">king-of-diecast</p>
                     </div>
 
                     <div class="item_highlight">
@@ -83,7 +84,7 @@
                             <img src="assets/img/foto-4.png" alt="">
 
                         </div>
-                        <p class="user_name">Maykon</p>
+                        <p class="user_name">Dianinha123</p>
                     </div>
 
                     <div class="item_highlight">
@@ -93,7 +94,7 @@
                             <img src="assets/img/foto-5.png" alt="">
 
                         </div>
-                        <p class="user_name">Maykon</p>
+                        <p class="user_name">$!-Maykon</p>
                     </div>
 
                     <div class="item_highlight">
@@ -103,7 +104,7 @@
                             <img src="assets/img/foto-6.png" alt="">
 
                         </div>
-                        <p class="user_name">Maykon</p>
+                        <p class="user_name">carTwins</p>
                     </div>
 
                     <div class="item_highlight">
@@ -113,7 +114,59 @@
                             <img src="assets/img/foto-7.png" alt="">
 
                         </div>
-                        <p class="user_name">Maykon</p>
+                        <p class="user_name">celtaV8</p>
+                    </div>
+
+                </div>
+
+                <div class="post">
+
+                    <div class="information">
+
+                        <div class="user">
+
+                            <div class="profile_miniature">
+
+                                <img src="assets/img/wheelknightslogo.png" alt="foto de perfil">
+
+                            </div>
+                            <p class="user_name">WheelKnights</p>
+
+                        </div>
+
+                        <img src="assets/img/op.png" alt="opções" class="options">
+
+                    </div>
+
+                    <div class="content_front_post">
+
+                        <img src="assets/img/onupost.jpg" alt="postagem" class="front_post">
+
+                    </div>
+                    
+                    <div class="content_of_post">
+
+                        <div class="react_icons">
+
+                            <img src="assets/img/curtir.png" alt="curtir" class="icon liked" onclick="liked(this)">
+                            <img src="assets/img/comentario.png" alt="comentar" class="icon">
+
+                        </div>
+
+                        <p class="description">
+                            <span>WheelKnights</span>
+                            
+                        </p>
+                        <p class="clock_post">Agora há pouco</p>
+
+                    </div>
+
+                    <div class="post_comment">
+
+                        <img src="assets/img/sorriso.png" alt="reação" class="icon">
+                        <input type="text" class="comment_msg" name="msg" placeholder="Comentar na postagem">
+                        <button class="comment_btn" type="submit">Postar</button>
+
                     </div>
 
                 </div>
@@ -152,7 +205,6 @@
 
                         </div>
 
-                        <p class="likes">709 curtidas</p>
                         <p class="description">
                             <span>thuntedblog</span>
                             Um novo lote da série de #batmobile com corpo e base de metal em breve.
@@ -205,7 +257,6 @@
 
                         </div>
 
-                        <p class="likes">312 curtidas</p>
                         <p class="description">
                             <span>hotcarcollection</span>
                             A magia das miniaturas começa desde cedo. #vivaodiecast
@@ -258,7 +309,6 @@
 
                         </div>
 
-                        <p class="likes">453 curtidas</p>
                         <p class="description">
                             <span>king_of_diecast</span>
                             Hot Wheels T-Hunt: Uma História de Tesouros nas Pistas! 🕵️‍♂️🚗💎 Desde 1995, os Hot Wheels T-Hunt têm sido a alegria dos colecionadores. A série de Caça ao Tesouro surgiu como uma emocionante adição, apresentando carros especiais, muitas vezes com pinturas exclusivas e detalhes únicos. Ano após ano, os T-Hunts tornaram-se os itens mais cobiçados para os apaixonados por miniaturas. Qual é a sua lembrança favorita dos T-Hunts? Compartilhe suas histórias! 🏁✨ #HotWheelsTHunt #HistóriaHotWheels #Colecionadores
@@ -311,7 +361,6 @@
 
                         </div>
 
-                        <p class="likes">104 curtidas</p>
                         <p class="description">
                             <span>ocolecionador</span>
                             Vale a Pena a Customização de Miniaturas Diecast?
@@ -353,15 +402,15 @@ Então, vale a pena a customização de miniaturas Diecast? A resposta é subjet
                 <div class="profile_body">
 
                     <div class="profile_miniature">
-                        <img src="assets/img/thunted.png" alt="">
+                        <img src="assets/img/wheelknightslogo.png" alt="">
                     </div>
 
                     <div>
-                        <p class="user_name">thuntedblog</p>
-                        <p class="sub_text">Acesse: thuntedblog.com</p>
+                        <p class="user_name">WheelKnights</p>
+                        <p class="sub_text">Acesse: vistawheelknights.com</p>
                     </div>
 
-                    <button class="change_btn">Mudar</button>
+                    <button class="change_btn">Ir</button>
 
                 </div>
 
@@ -397,18 +446,24 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error('Erro ao obter detalhes do usuário:', error));
     } else {
         console.log("ID do Usuário não está presente na URL.");
+        window.location.href = `signin.html`;
         // Talvez redirecione para uma página de erro ou tome alguma ação apropriada.
     }
 });
 
 // Resto do seu código JavaScript...
 
+const urlParams = new URLSearchParams(window.location.search);
+const idUsuario = urlParams.get('idUsuario');
 
 function goRegisterMiniature(){
-    const urlParams = new URLSearchParams(window.location.search);
-    const idUsuario = urlParams.get('idUsuario');
 
     window.location.href = `registerminiature.html?idUsuario=${idUsuario}`;
+}
+
+function goDashboard(){
+
+    window.location.href = `dashboard/dashboard.html?idUsuario=${idUsuario}`;
 }
 
 function liked(clickedElement) {
