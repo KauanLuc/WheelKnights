@@ -131,3 +131,32 @@ border-radius: 15px;
   color: white; 
 }
 
+.text{
+  text-align: justify;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.text h1{
+  color: orange;
+}
+
+.text h2{
+  color: #32B9CD;
+}
+
+.text p{
+  font-size: larger;
+  font-family: 'Times Nem Roman';
+}
+
+.text span{
+  font-size: small;
+  font-family:'Times New Roman';
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

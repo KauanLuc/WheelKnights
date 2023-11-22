@@ -21,7 +21,7 @@
                 <img src="assets/img/icon-feed.png" alt="feed" class="icon">
                 <img src="assets/img/icon-register-white.png" alt="registrar miniaturas" class="icon" onclick="goRegisterMiniature()">
                 <img src="assets/img/icon-dashboard-white.png" alt="dashboard" class="icon" onclick="goDashboard()">
-                <img src="assets/img/foto-perfil.png" alt="foto de perfil" class="icon profile_user">
+                <img src="assets/img/wheelknightslogo.png" alt="foto de perfil" class="icon profile_user">
 
             </div>
 
@@ -416,6 +416,21 @@ Então, vale a pena a customização de miniaturas Diecast? A resposta é subjet
 
                 <p class="suggestions_text">Sugestões para você <span>Todos</span></p>
 
+                <div class="profile_body">
+
+                    <div class="profile_miniature">
+                        <img src="assets/img/logonouser.png" alt="">
+                    </div>
+
+                    <div>
+                        <p class="user_name">ocolecionador</p>
+                        <p class="sub_text">Vale a pena a customização de miniaturas diecast?</p>
+                    </div>
+
+                    <button class="change_btn">Ver Matéria</button>
+
+                </div>
+
             </div>
 
         </div>
@@ -437,13 +452,13 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("ID do Usuário:", idUsuario);
 
         // Se necessário, fazer uma solicitação ao servidor para obter detalhes do usuário com base no ID
-        fetch(`api/usuario/${idUsuario}`)
+        /*fetch(`api/usuario/${idUsuario}`)
             .then(response => response.json())
             .then(usuario => {
                 // Fazer algo com os detalhes do usuário obtidos do servidor
                 console.log("Detalhes do Usuário:", usuario);
             })
-            .catch(error => console.error('Erro ao obter detalhes do usuário:', error));
+            .catch(error => console.error('Erro ao obter detalhes do usuário:', error));*/
     } else {
         console.log("ID do Usuário não está presente na URL.");
         window.location.href = `signin.html`;
