@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/feed.css">
+    <style>
+        body{
+            background-image: url('../assets/img/fire.jpg');
+            display: flex;
+            justify-content: center;
+        }
+
+        .album{
+            background-size: cover;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 30px;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .figurinha{
+            width: 100%;
+            border: 3px solid red;
+            text-align: center;
+            color: white;
+            background-color: orange;
+        }
+
+        .figurinha img{
+            max-width: 100%;
+            height: auto;
+        }
+
+        .mensagemErroDiv{
+            display: none;
+            align-items: center;
+            justify-content: center;
+            height: 80%;
+            width: 80%;
+            background-color: orange;
+            color: white;
+        }
+    </style>
+    <title>Álbum de Miniaturas - WK</title>
+</head>
+<body>
+    <nav class="main_menu">
+
+        <div class="menu_links">
+
+            <h1 class="brand_font">Álbum de Miniaturas</h1>
+            <input type="text" name="ms" class="search_top" placeholder="Pesquisar">
+
+            <div class="menu_icons">
+
+                <img src="../assets/img/icon-feed-white.png" alt="feed" class="icon" onclick="goFeed()">
+                <img src="../assets/img/icon-register-white.png" alt="registrar miniaturas" class="icon" onclick="goRegisterMiniature()">
+                <img src="../assets/img/icon-dashboard-white.png" alt="dashboard" class="icon" onclick="goDashboard()">
+                <img src="../assets/img/icon-album.png" alt="dashboard" class="icon">
+                <img src="../assets/img/wheelknightslogo.png" alt="foto de perfil" class="icon profile_user">
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <div class="mensagemErroDiv">Você não tem miniaturas cadastradas</div>
+    <div class="album" id="content"></div>
+</body>
+</html>
+
+<script>
+
+const urlParams = new URLSearchParams(window.location.search);
+const idUsuario = urlParams.get('idUsuario');
+
+function getMostarColecao(){
+    fetch(`/dashboard/mostrarColecao/${idUsuario}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayMostrarColecao(data);
+        })
+        .catch(error => console.log(`Erro ao obter dados: ${error}`));
+}
+
+function displayMostrarColecao(data){
+    if (data && Array.isArray(data) && data.length > 0) {
+        console.log(data);
+        const modelo = [];
+        const tema = [];
+        const tipo = [];
+        const marca = [];
+        const valorCompra = [];
+        const imagem_miniatura = [];
+
+        for (var i = 0; i < data.length; i++) {
+            const item = data[i];
+            modelo.push(item['modelo']);
+            tema.push(item['tema']);
+            tipo.push(item['tipo']);
+            marca.push(item['marca']);
+            valorCompra.push(item['valorCompra']);
+            imagem_miniatura.push(item['imagem_miniatura']);
+
+            content.innerHTML += `
+            <div class="figurinha">
+                <img src="../assets/imgMiniaturas/${imagem_miniatura[i]}" alt="${modelo[i]}">
+                <h3>Modelo: ${modelo[i]}</h3>
+                <p>Tipo: ${tipo[i]}</p>
+                <p>Tema: ${tema[i]}</p>
+                <p>Marca: ${marca[i]}</p>
+                <p>Valor: ${valorCompra[i]}</p>
+            </div>
+            `;
+        }
+    } else {
+        mensagemErroDiv.style.display = 'block';
+    }
+}
+
+function goFeed(){
+
+window.location.href = `../feed.html?idUsuario=${idUsuario}`;
+}
+
+function goRegisterMiniature(){
+
+window.location.href = `../registerminiature.html?idUsuario=${idUsuario}`;
+}
+
+function goDashboard(){
+
+    window.location.href = `dashboard.html?idUsuario=${idUsuario}`;
+}
+
+getMostarColecao();
+
+</script>

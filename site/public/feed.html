@@ -21,6 +21,7 @@
                 <img src="assets/img/icon-feed.png" alt="feed" class="icon">
                 <img src="assets/img/icon-register-white.png" alt="registrar miniaturas" class="icon" onclick="goRegisterMiniature()">
                 <img src="assets/img/icon-dashboard-white.png" alt="dashboard" class="icon" onclick="goDashboard()">
+                <img src="assets/img/icon-album-white.png" alt="album" class="icon" onclick="goAlbum()">
                 <img src="assets/img/wheelknightslogo.png" alt="foto de perfil" class="icon profile_user">
 
             </div>
@@ -477,6 +478,11 @@ function goRegisterMiniature(){
 function goDashboard(){
 
     window.location.href = `dashboard/dashboard.html?idUsuario=${idUsuario}`;
+}
+
+function goAlbum() {
+
+    window.location.href = `dashboard/miniAlbum.html?idUsuario=${idUsuario}`;
 }
 
 function liked(clickedElement) {
