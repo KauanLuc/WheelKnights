@@ -155,7 +155,9 @@
 
                         <p class="description">
                             <span>WheelKnights</span>
-                            
+                            Em nosso blog compartilhado dedicado à apaixonante indústria do diecast, não estamos apenas explorando o mundo fascinante dos modelos em miniatura, mas também desempenhando um papel fundamental no apoio ao desenvolvimento de empregos e na construção de comunidades locais. Nossa paixão pelo colecionismo não se limita às prateleiras de exibição, mas também se estende ao coração das cidades e vilas, onde as indústrias do diecast podem prosperar.
+                            <br>
+                            Ao promover a produção local, destacar artesãos talentosos e participar ativamente em feiras e eventos de colecionadores, estamos contribuindo para a criação de oportunidades de emprego e apoiando nossas comunidades. Nossa iniciativa não apenas celebra a precisão e a riqueza de detalhes dos modelos diecast, mas também demonstra nosso compromisso com a construção de um futuro mais sustentável, onde a paixão pela arte encontra um lar acolhedor em nossas cidades e faz diferença nas vidas das pessoas.
                         </p>
                         <p class="clock_post">Agora há pouco</p>
 
@@ -443,7 +445,6 @@ Então, vale a pena a customização de miniaturas Diecast? A resposta é subjet
 <script>
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Obter o ID do usuário do URL
     const urlParams = new URLSearchParams(window.location.search);
     const idUsuario = urlParams.get('idUsuario');
 
@@ -462,11 +463,8 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.log("ID do Usuário não está presente na URL.");
         window.location.href = `signin.html`;
-        // Talvez redirecione para uma página de erro ou tome alguma ação apropriada.
     }
 });
-
-// Resto do seu código JavaScript...
 
 const urlParams = new URLSearchParams(window.location.search);
 const idUsuario = urlParams.get('idUsuario');

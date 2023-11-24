@@ -26,7 +26,7 @@ function estimativaValorColecao(idUsuario) {
 
 function miniaturaMaisCara(idUsuario) {
     var instrucao = `
-        SELECT modelo, MAX(valorCompra), fkMarca FROM miniatura WHERE fkColecao = '${idUsuario}';
+        SELECT modelo, valorCompra FROM miniatura WHERE fkColecao = '${idUsuario}' ORDER BY valorCompra DESC LIMIT 1;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -34,22 +34,28 @@ function miniaturaMaisCara(idUsuario) {
 
 function miniaturaMaisBarata(idUsuario) {
     var instrucao = `
-        SELECT modelo, MIN(valorCompra), fkMarca FROM miniatura WHERE fkColecao = '${idUsuario}';
+        SELECT modelo, valorCompra FROM miniatura WHERE fkColecao = '${idUsuario}' ORDER BY valorCompra ASC LIMIT 1;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-/*function marcaFavorita(idUsuario){
+function marcasFavoritas(idUsuario){
     var instrucao = `
-        SELECT 
+    SELECT marca, COUNT(*) as quantidade
+    FROM miniatura
+    JOIN marca  ON fkMarca = idMarca where fkColecao = '${idUsuario}'
+    GROUP BY fkMarca order by quantidade desc; 
     `;
-}*/
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 module.exports = {
     mostrarColecao,
     qtdMiniaturas,
     estimativaValorColecao,
     miniaturaMaisCara,
-    miniaturaMaisBarata
+    miniaturaMaisBarata,
+    marcasFavoritas
 };

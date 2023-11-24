@@ -65,10 +65,24 @@ function miniaturaMaisBarata(req, res) {
         });
 }
 
+function marcasFavoritas(req, res) {
+    const idUsuario = req.params.idUsuario;
+
+    dashboardModel.marcasFavoritas(idUsuario)
+        .then((result) => {
+            res.status(200).json(result);
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).json({ error: 'Erro interno do servidor' });
+        });
+}
+
 module.exports = {
     mostrarColecao,
     qtdMiniaturas,
     estimativaValorColecao,
     miniaturaMaisCara,
-    miniaturaMaisBarata
+    miniaturaMaisBarata,
+    marcasFavoritas
 };

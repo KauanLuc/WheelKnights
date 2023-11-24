@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../css/feed.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <title>Analisar Coleção - WK</title>
 </head>
 <body>
 
@@ -13,7 +15,6 @@
         <div class="menu_links">
 
             <h1 class="brand_font">WheelKnights</h1>
-            <!--<img src="../assets/img/WheelKnights.png" alt="logo WheelKnights" class="brand_logo">-->  
             <input type="text" name="ms" class="search_top" placeholder="Pesquisar">
 
             <div class="menu_icons">
@@ -28,7 +29,50 @@
         </div>
 
     </nav>
+    
+    <section>
+        <div class="container">
+            <div class="card_box">
+                <div class="card">
+                    <div>
+                        <div  id="qtdMiniaturasDiv" class="numbers"></div>
+                        <div class="card_name">Quantidade de Miniaturas</div>
+                    </div>
+                </div>
 
+                <div class="card">
+                    <div>
+                        <div  id="estimativaValorColecaoDiv" class="numbers">R$</div>
+                        <div class="card_name">Valor Estimado da Coleção</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div  id="maxMiniaturaDiv" class="numbers"><span id="maxMiniaturaModelo"></span><span id="maxMiniaturaValue">R$</span></div>
+                        <div class="card_name">Miniatura mais Cara</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div  id="minMiniaturaDiv" class="numbers"><span id="minMiniaturaModelo"></span><span id="minMiniaturaValue">R$</span></div>
+                        <div class="card_name">Miniatura mais Barata</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+        <div class="box">
+            <canvas id="chartMarcasFavoritas"></canvas>
+        </div>
+
+    
+
+    
 </body>
 </html>
 
@@ -47,5 +91,168 @@ function goRegisterMiniature(){
 
     window.location.href = `../registerminiature.html?idUsuario=${idUsuario}`;
 }
+
+function getQtdMiniaturas(){
+    fetch(`/dashboard/qtdMiniaturas/${idUsuario}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayQtdMiniaturas(data);
+        })
+        .catch(error => console.error(`Erro ao obter dados: ${error}`));
+}
+
+function displayQtdMiniaturas(data) {
+    if (data && Array.isArray(data) && data.length > 0) {
+            const countModelo = data[0]['COUNT(modelo)'];
+            qtdMiniaturasDiv.innerHTML = `${countModelo}`;
+    } else {
+        qtdMiniaturasDiv.innerHTML = 'Nenhum dado disponível.';
+    }
+}
+
+function getEstimativaValor() {
+    fetch(`/dashboard/estimativaValorColecao/${idUsuario}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayEstimativaValor(data);
+        })
+        .catch(error => console.error(`Erro ao obter estimativa de valor: ${error}`));
+}
+
+function displayEstimativaValor(data) {
+    if (data && Array.isArray(data) && data.length > 0) {
+        const valorEstimado = Number(data[0]['SUM(valorCompra)'])/1.8;
+        estimativaValorColecaoDiv.innerHTML += `${valorEstimado.toFixed(2)}`;
+    } else {
+        estimativaValorColecaoDiv.innerHTML = 'Nenhum dado disponível.';
+    }
+}
+
+function getMaxMiniatura(){
+    fetch(`/dashboard/miniaturaMaisCara/${idUsuario}`)
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayMaxMiniatura(data);
+        })
+        .catch(error => console.error(`Erro ao obter a miniatura mais cara: ${error}`));
+}
+
+function displayMaxMiniatura(data){
+    if(data && Array.isArray(data) && data.length > 0) {
+        const modeloMaxMiniatura = data[0]['modelo'];
+        const maxMiniatura = data[0]['valorCompra'];
+        maxMiniaturaModelo.innerHTML += `${modeloMaxMiniatura} `;
+        maxMiniaturaValue.innerHTML += maxMiniatura;
+    } else {
+        maxMiniaturaModelo.innerHTML = 'Nenhum dado disponível.';
+        maxMiniaturaValue.innerHTML = ``;
+    }
+}
+
+function getMinMiniatura(){
+    fetch(`/dashboard/miniaturaMaisBarata/${idUsuario}`)
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            //createChart(data);
+            displayMinMiniatura(data);
+        })
+        .catch(error => console.error(`Erro ao obter a miniatura mais barata: ${error}`));
+}
+
+function displayMinMiniatura(data){
+    if(data && Array.isArray(data) && data.length > 0) {
+        const modeloMinMiniatura = data[0]['modelo'];
+        const minMiniatura = data[0]['valorCompra'];
+        minMiniaturaModelo.innerHTML += `${modeloMinMiniatura} `;
+        minMiniaturaValue.innerHTML += minMiniatura;
+    } else {
+        minMiniaturaModelo.innerHTML = 'Nenhum dado disponível.';
+        minMiniaturaValue.innerHTML = ``;
+    }
+}
+
+function getMarcasFavoritas(data){
+    fetch(`/dashboard/marcasFavoritas/${idUsuario}`)
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // displayMarcasFavoritas(data);
+            chartMarcasFavoritas(data);
+        })
+        .catch(error => console.error(`Erro ao obter as marcas favoritas: ${error}`));
+}
+
+ function displayMarcasFavoritas(data){
+     if(data && Array.isArray(data) && data.length > 0) {
+         const marca = data[0]['marca'];
+         const quantidade = data[0]['quantidade'];
+         console.log(marca, quantidade);
+     } else {
+        console.log(`Erro`)
+     }
+}
+
+function chartMarcasFavoritas(data) {
+    console.log(data);
+    const labels = [];
+    const dataValues = [];
+
+    for (var i = 0; i < data.length; i++) {
+        const item = data[i];
+        labels.push(item['marca']);
+        dataValues.push(item['quantidade']);
+    }
+
+    const ctx = document.getElementById('chartMarcasFavoritas').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Quantidade de miniaturas',
+                data: dataValues,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+
+getQtdMiniaturas();
+getEstimativaValor();
+getMaxMiniatura();
+getMinMiniatura();
+getMarcasFavoritas();
 
 </script>

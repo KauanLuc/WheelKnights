@@ -1,0 +1,45 @@
+.container{
+    position: relative;
+    width: 100%;
+}
+
+.card_box{
+    position: absolute;
+    width: 100%;
+    padding: 20px;
+    margin-top: 45px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.card_box .card{
+    position: relative;
+    background: #32B9CD;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card_box .card .numbers{
+    position: relative;
+    font-weight: 500;
+    font-size: 32px;
+    color: white;
+}
+
+.card_box .card .card_name{
+    color: rgb(51, 49, 49);
+    font-size: 1.1em;
+    margin-top: 5px;
+}
+
+.box{
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    margin-top: 250px;
+}
+
