@@ -77,8 +77,8 @@
 
                 <input type="number" placeholder="Preço de Compra" class="inputForm" id="valorCompra">
 
-                <label for="uploadImage">Clique e escolha uma imagem de sua miniatura</label>
-                <input type="file" name="imagem" id="uploadImage">
+                <label for="foto">Clique e escolha uma imagem de sua miniatura</label>
+                <input type="file" name="foto" id="foto">
 
                 <button onclick="cadastrar()">Registrar</button>
 
@@ -103,7 +103,7 @@ function goDashboard(){
     window.location.href = `dashboard/dashboard.html?idUsuario=${idUsuario}`;
 }
 
-function cadastrar(){
+function cadastrar() {
     var fkColecaoVar = idUsuario;
     var fkMarcaVar = Number(marca.value);
     var modeloVar = modelo.value;
@@ -111,31 +111,30 @@ function cadastrar(){
     var fkTipoVeiculoVar = Number(tipoVeiculo.value);
     var valorCompraVar = Number(valorCompra.value);
 
-    if (
-        fkMarcaVar == "" ||
-        modeloVar == "" ||
-        fkTipoVeiculoVar == ""
-    ) {
-        alert("Marca, modelo e Tipo do veículo são obrigatórios")
+    // Crie um objeto FormData
+    var formData = new FormData();
+    formData.append('fkColecao', fkColecaoVar);
+    formData.append('fkMarca', fkMarcaVar);
+    formData.append('modelo', modeloVar);
+    formData.append('fkTematica', fkTematicaVar);
+    formData.append('fkTipoVeiculo', fkTipoVeiculoVar);
+    formData.append('valorCompra', valorCompraVar);
+    formData.append('foto', foto.files[0]);
 
+    if (
+        fkMarcaVar === null ||
+        modeloVar === "" ||
+        fkTipoVeiculoVar === null
+    ) {
+        alert("Marca, modelo e Tipo do veículo são obrigatórios");
         return false;
     }
 
     fetch("registerMiniature/cadastrar", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            colecaoServer: fkColecaoVar,
-            marcaServer: fkMarcaVar,
-            modeloServer: modeloVar,
-            tematicaServer: fkTematicaVar,
-            tipoVeiculoServer: fkTipoVeiculoVar,
-            valorCompraServer: valorCompraVar
-        }),
+        body: formData, 
     })
-    .then(function(resposta){
+    .then(function(resposta) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
@@ -144,11 +143,12 @@ function cadastrar(){
             throw "Houve um erro ao tentar realizar o cadastro da miniatura.";
         }
     })
-    .catch(function(resposta){
+    .catch(function(resposta) {
         console.log(`#ERRO: ${resposta}`);
     });
 
-    return false
+    return false;
 }
+
 
 </script>
