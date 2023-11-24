@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/feed.css">
+    <link rel="shortcut icon" href="../assets/img/wheelknightslogo32.ico" type="image/x-icon">
     <style>
         body{
             background-image: url('../assets/img/fire.jpg');
             display: flex;
             justify-content: center;
+            background-size: cover;
         }
 
         .album{
@@ -28,9 +30,19 @@
             background-color: orange;
         }
 
+        .figurinha h3{
+            color: red;
+        }
+
+        .figurinha h3 span{
+            color: white;
+        }
+
         .figurinha img{
+            width: auto;
             max-width: 100%;
-            height: auto;
+            height: 200px;
+            background-size: cover;
         }
 
         .mensagemErroDiv{
@@ -113,11 +125,12 @@ function displayMostrarColecao(data){
             content.innerHTML += `
             <div class="figurinha">
                 <img src="../assets/imgMiniaturas/${imagem_miniatura[i]}" alt="${modelo[i]}">
-                <h3>Modelo: ${modelo[i]}</h3>
-                <p>Tipo: ${tipo[i]}</p>
-                <p>Tema: ${tema[i]}</p>
-                <p>Marca: ${marca[i]}</p>
-                <p>Valor: ${valorCompra[i]}</p>
+                <h3>Modelo: <span>${modelo[i]}</span></h3>
+                <h3>Tipo: <span>${tipo[i]}</span></h3>
+                <h3>Tema: <span>${tema[i]}</span></h3>
+                <h3>Marca: <span>${marca[i]}</span></h3>
+                <h3>Valor de Compra: <span>R$${valorCompra[i]}</span></h3>
+                <h3>${i+1}/${data.length}</h3>
             </div>
             `;
         }

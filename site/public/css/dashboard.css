@@ -38,6 +38,9 @@
 
 .box{
     position: absolute;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
     width: 400px;
     height: 300px;
     margin-top: 250px;
