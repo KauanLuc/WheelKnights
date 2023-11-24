@@ -8,7 +8,7 @@ function cadastrar(req, res) {
     var tematica = req.body.fkTematica;
     var tipoVeiculo = req.body.fkTipoVeiculo;
     var valorCompra = req.body.valorCompra;
-    var imagem = req.file.filename; 
+    var imagem = req.file ? req.file.filename : null; 
 
     if (marca == undefined) {
         return res.status(400).send("A marca da sua miniatura está indefinida!");

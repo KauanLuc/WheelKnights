@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function mostrarColecao(idUsuario) {
     var instrucao = `
-        SELECT modelo, fkMarca, tipoVeiculo, fkTematica, valorCompra FROM miniatura WHERE fkColecao = '${idUsuario}';
+        SELECT imagem_miniatura, modelo, fkMarca, fkTipoVeiculo, fkTematica, valorCompra FROM miniatura WHERE fkColecao = '${idUsuario}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

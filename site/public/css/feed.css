@@ -383,9 +383,10 @@ body{
     text-transform: capitalize;
   }
 
-  .register_content #uploadImage{
-    background: none;
-    border: none;
+  .register_content #foto{
+    display: block;
+    background: transparent;
+    border: transparent;
   }
 
 .register_content label{
