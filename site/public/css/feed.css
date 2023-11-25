@@ -12,7 +12,7 @@ body{
     width: 100%;
     background: white;
     position: relative;
-    font-family: 'Times New Roman';
+    font-family: 'Segoe UI';
 }
 
 .main_menu{
@@ -395,20 +395,7 @@ body{
     font-weight: 500px;
 }
 
-  /*input[type="file"]::file-selector-button{
-    display: block;
-    margin-bottom: 30px;
-    width: 300px;
-    height: 35px;
-    background: #eee;
-    border: 1px solid orange;
-    border-radius: 5px;
-    color: rgba(0, 0, 0, 0.5);
-    text-align: center;
-    text-transform: capitalize;
-  }*/
-
-  .register_content select option{
+.register_content select option{
     font-size: 16px;
   }
 

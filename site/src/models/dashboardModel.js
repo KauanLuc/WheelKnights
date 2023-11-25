@@ -8,7 +8,7 @@ function mostrarColecao(idUsuario) {
         JOIN usuario ON fkUsuario = idUsuario
         JOIN marca ON fkMarca = idMarca
         JOIN tematica ON fkTematica = idTematica
-        JOIN tipoVeiculo ON fkTipoVeiculo = idTipoVeiculo WHERE fkColecao = '${idUsuario}';
+        JOIN tipoVeiculo ON fkTipoVeiculo = idTipoVeiculo WHERE fkColecao = '${idUsuario}' ORDER BY modelo;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -57,11 +57,23 @@ function marcasFavoritas(idUsuario){
     return database.executar(instrucao);
 }
 
+function valorPMarca(idUsuario){
+    var instrucao = `
+        SELECT marca, SUM(valorCompra) as quantidade
+        FROM miniatura
+        JOIN marca  ON fkMarca = idMarca where fkColecao = '${idUsuario}'
+        GROUP BY fkMarca order by quantidade desc;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     mostrarColecao,
     qtdMiniaturas,
     estimativaValorColecao,
     miniaturaMaisCara,
     miniaturaMaisBarata,
-    marcasFavoritas
+    marcasFavoritas, 
+    valorPMarca
 };

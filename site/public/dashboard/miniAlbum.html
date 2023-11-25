@@ -4,57 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/feed.css">
+    <link rel="stylesheet" href="../css/album.css">
     <link rel="shortcut icon" href="../assets/img/wheelknightslogo32.ico" type="image/x-icon">
-    <style>
-        body{
-            background-image: url('../assets/img/fire.jpg');
-            display: flex;
-            justify-content: center;
-            background-size: cover;
-        }
-
-        .album{
-            background-size: cover;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 30px;
-            padding: 20px;
-            margin-top: 50px;
-        }
-
-        .figurinha{
-            width: 100%;
-            border: 3px solid red;
-            text-align: center;
-            color: white;
-            background-color: orange;
-        }
-
-        .figurinha h3{
-            color: red;
-        }
-
-        .figurinha h3 span{
-            color: white;
-        }
-
-        .figurinha img{
-            width: auto;
-            max-width: 100%;
-            height: 200px;
-            background-size: cover;
-        }
-
-        .mensagemErroDiv{
-            display: none;
-            align-items: center;
-            justify-content: center;
-            height: 80%;
-            width: 80%;
-            background-color: orange;
-            color: white;
-        }
-    </style>
     <title>Álbum de Miniaturas - WK</title>
 </head>
 <body>
@@ -104,6 +55,20 @@ function getMostarColecao(){
 }
 
 function displayMostrarColecao(data){
+    content.innerHTML += `
+            <a href="../registerminiature.html?idUsuario=${idUsuario}">
+                <div class="figurinha">
+                    <img src="../assets/img/addMiniature.jpg" alt="proximo modelo">
+                    <h3>Modelo: <span>Adicionar</span></h3>
+                    <h3>Tipo: <span>Adicionar</span></h3>
+                    <h3>Tema: <span>Adicionar</span></h3>
+                    <h3>Marca: <span>Adicionar</span></h3>
+                    <h3>Valor de Compra: <span>Adicionar</span></h3>
+                    <h3>X/${data.length}</h3>
+                </div>
+            </a>
+            `;
+
     if (data && Array.isArray(data) && data.length > 0) {
         console.log(data);
         const modelo = [];
@@ -124,7 +89,7 @@ function displayMostrarColecao(data){
 
             content.innerHTML += `
             <div class="figurinha">
-                <img src="../assets/imgMiniaturas/${imagem_miniatura[i]}" alt="${modelo[i]}">
+                <img src="${imagem_miniatura[i] != 'null' ? `../assets/imgMiniaturas/${imagem_miniatura[i]}` : '../assets/img/noMiniature.jpg'}" alt="${modelo[i]}">
                 <h3>Modelo: <span>${modelo[i]}</span></h3>
                 <h3>Tipo: <span>${tipo[i]}</span></h3>
                 <h3>Tema: <span>${tema[i]}</span></h3>

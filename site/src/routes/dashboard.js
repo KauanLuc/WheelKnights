@@ -16,4 +16,6 @@ router.get('/miniaturaMaisBarata/:idUsuario', dashboardController.miniaturaMaisB
 
 router.get('/marcasFavoritas/:idUsuario', dashboardController.marcasFavoritas);
 
+router.get('/valorPMarca/:idUsuario', dashboardController.valorPMarca);
+
 module.exports = router;

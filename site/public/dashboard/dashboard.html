@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="../css/feed.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="shortcut icon" href="../assets/img/wheelknightslogo32.ico" type="image/x-icon">
     <title>Analisar Coleção - WK</title>
@@ -32,45 +31,46 @@
 
     </nav>
     
-    <section>
-        <div class="container">
-            <div class="card_box">
-                <div class="card">
-                    <div>
-                        <div  id="qtdMiniaturasDiv" class="numbers"></div>
-                        <div class="card_name">Quantidade de Miniaturas</div>
-                    </div>
+    <div class="container">
+        <div class="card_box">
+            <div class="card">
+                <div>
+                    <div  id="qtdMiniaturasDiv" class="numbers"></div>
+                    <div class="card_name">Quantidade de Miniaturas</div>
                 </div>
+            </div>
 
-                <div class="card">
-                    <div>
-                        <div  id="estimativaValorColecaoDiv" class="numbers">R$</div>
-                        <div class="card_name">Valor Estimado da Coleção</div>
-                    </div>
+            <div class="card">
+                <div>
+                    <div  id="estimativaValorColecaoDiv" class="numbers">R$</div>
+                    <div class="card_name">Valor Estimado da Coleção</div>
                 </div>
+            </div>
 
-                <div class="card">
-                    <div>
-                        <div  id="maxMiniaturaDiv" class="numbers"><span id="maxMiniaturaModelo"></span><span id="maxMiniaturaValue">R$</span></div>
-                        <div class="card_name">Miniatura mais Cara</div>
-                    </div>
+            <div class="card">
+                <div>
+                    <div  id="maxMiniaturaDiv" class="numbers"><span id="maxMiniaturaModelo"></span><span id="maxMiniaturaValue">R$</span></div>
+                    <div class="card_name">Miniatura mais Cara</div>
                 </div>
+            </div>
 
-                <div class="card">
-                    <div>
-                        <div  id="minMiniaturaDiv" class="numbers"><span id="minMiniaturaModelo"></span><span id="minMiniaturaValue">R$</span></div>
-                        <div class="card_name">Miniatura mais Barata</div>
-                    </div>
+            <div class="card">
+                <div>
+                    <div  id="minMiniaturaDiv" class="numbers"><span id="minMiniaturaModelo"></span><span id="minMiniaturaValue">R$</span></div>
+                    <div class="card_name">Miniatura mais Barata</div>
                 </div>
             </div>
         </div>
+    </div>
 
-    </section>
-
-
+    <div class="graph_box">
         <div class="box">
             <canvas id="chartMarcasFavoritas"></canvas>
         </div>
+        <div class="box">
+            <canvas id="chartValorPMarca"></canvas>
+        </div>
+    </div>
 
     
 
@@ -180,7 +180,6 @@ function getMinMiniatura(){
             return response.json();
         })
         .then(data => {
-            //createChart(data);
             displayMinMiniatura(data);
         })
         .catch(error => console.error(`Erro ao obter a miniatura mais barata: ${error}`));
@@ -207,20 +206,9 @@ function getMarcasFavoritas(data){
             return response.json();
         })
         .then(data => {
-            // displayMarcasFavoritas(data);
             chartMarcasFavoritas(data);
         })
         .catch(error => console.error(`Erro ao obter as marcas favoritas: ${error}`));
-}
-
- function displayMarcasFavoritas(data){
-     if(data && Array.isArray(data) && data.length > 0) {
-         const marca = data[0]['marca'];
-         const quantidade = data[0]['quantidade'];
-         console.log(marca, quantidade);
-     } else {
-        console.log(`Erro`)
-     }
 }
 
 function chartMarcasFavoritas(data) {
@@ -248,11 +236,94 @@ function chartMarcasFavoritas(data) {
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: false
+                }
+            },
+            scales: {
+            x: {
+                ticks: {
+                    color: 'rgb(51, 49, 49)', 
+                }
+            },
+            y: {
+                ticks: {
+                    color: 'rgb(51, 49, 49)',
                 }
             }
         }
+        }
     });
+}
+
+function getValorPMarca(data){
+    fetch(`/dashboard/valorPMarca/${idUsuario}`)
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            chartValorPMarca(data);
+        })
+        .catch(error => console.error(`Erro ao obter as marcas favoritas: ${error}`));
+}
+
+function chartValorPMarca(data) {
+    console.log(data);
+    const labels = [];
+    const dataValues = [];
+
+    for (var i = 0; i < data.length; i++) {
+        const item = data[i];
+        labels.push(item['marca']);
+        dataValues.push(item['quantidade']);
+    }
+
+    const ctx = document.getElementById('chartValorPMarca').getContext('2d');
+    const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Gasto na Marca (Em R$)',
+            data: dataValues,
+            backgroundColor: 'orange',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        const value = context.parsed.y;
+                        return 'R$' + value.toFixed(2);
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: 'rgb(51, 49, 49)', 
+                }
+            },
+            y: {
+                ticks: {
+                    color: 'rgb(51, 49, 49)',
+                }
+            }
+        }
+    }
+});
+
+
 }
 
 
@@ -261,5 +332,6 @@ getEstimativaValor();
 getMaxMiniatura();
 getMinMiniatura();
 getMarcasFavoritas();
+getValorPMarca();
 
 </script>

@@ -1,3 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus{
+    outline: none;
+}
+
+body{
+    width: 100%;
+    background: white;
+    position: relative;
+    font-family: 'Segoe UI';
+}
+
+.main_menu{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #32B9CD;
+    border-bottom: 1px solid orange;
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+}
+
+.menu_links{
+    width: 70%;
+    max-width: 1000px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand_font{
+    height: 100%;
+    margin-top: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.search_top{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 35px;
+    background: #eee;
+    border: 1px solid orange;
+    border-radius: 5px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.search_top::placeholder{
+    color: rgb(194, 187, 187);
+}
+
+.menu_icons{
+    height: 22px;
+    position: relative;
+}
+
+.icon{
+    height: 100%;
+    cursor: pointer;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.profile_user{
+    width: 22px;
+    border-radius: 50%;
+    background-size: cover;
+    cursor: pointer;
+}
+
 .container{
     position: relative;
     width: 100%;
@@ -36,13 +119,24 @@
     margin-top: 5px;
 }
 
-.box{
+.graph_box{
     position: absolute;
+    width: 100px;
+    padding: 20px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    width: 400px;
-    height: 300px;
-    margin-top: 250px;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+    margin-top: 290px;
+    min-height: 200px;
+}
+
+.graph_box .box{
+    position: relative;
+    background: none;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    height: auto;
 }
 
