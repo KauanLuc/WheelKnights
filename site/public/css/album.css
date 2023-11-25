@@ -21,6 +21,7 @@ body{
     text-align: center;
     color: white;
     background-color: orange;
+    text-transform: capitalize;
 }
 
 .figurinha h3{
@@ -36,16 +37,6 @@ body{
     max-width: 100%;
     height: 200px;
     background-size: cover;
-}
-
-.mensagemErroDiv{
-    display: none;
-    align-items: center;
-    justify-content: center;
-    height: 80%;
-    width: 80%;
-    background-color: orange;
-    color: white;
 }
 
 a{
