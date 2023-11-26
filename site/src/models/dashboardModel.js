@@ -50,8 +50,8 @@ function marcasFavoritas(idUsuario){
     var instrucao = `
     SELECT marca, COUNT(*) as quantidade
     FROM miniatura
-    JOIN marca  ON fkMarca = idMarca where fkColecao = '${idUsuario}'
-    GROUP BY fkMarca order by quantidade desc; 
+    JOIN marca ON fkMarca = idMarca WHERE fkColecao = '${idUsuario}'
+    GROUP BY fkMarca ORDER BY quantidade desc; 
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -61,9 +61,31 @@ function valorPMarca(idUsuario){
     var instrucao = `
         SELECT marca, SUM(valorCompra) as quantidade
         FROM miniatura
-        JOIN marca  ON fkMarca = idMarca where fkColecao = '${idUsuario}'
-        GROUP BY fkMarca order by quantidade desc;
+        JOIN marca ON fkMarca = idMarca WHERE fkColecao = '${idUsuario}'
+        GROUP BY fkMarca ORDER BY quantidade desc;
     `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function tipoVeiculoFavorito(idUsuario){
+    var instrucao = `
+        SELECT tipo, COUNT(*) as quantidade
+        FROM miniatura
+        JOIN tipoVeiculo ON fkTipoVeiculo = idTipoVeiculo WHERE fkColecao = '${idUsuario}'
+        GROUP BY fkTipoVeiculo ORDER BY quantidade desc;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function valorPTipo(idUsuario){
+    var instrucao = `
+        SELECT tipo, SUM(valorCompra) as quantidade
+        FROM miniatura
+        JOIN tipoVeiculo ON fkTipoVeiculo = idTipoVeiculo WHERE fkColecao = '${idUsuario}'
+        GROUP BY fkTipoVeiculo ORDER BY quantidade desc;
+    `
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -75,5 +97,7 @@ module.exports = {
     miniaturaMaisCara,
     miniaturaMaisBarata,
     marcasFavoritas, 
-    valorPMarca
+    valorPMarca,
+    tipoVeiculoFavorito,
+    valorPTipo
 };

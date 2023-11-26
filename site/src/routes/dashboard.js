@@ -18,4 +18,8 @@ router.get('/marcasFavoritas/:idUsuario', dashboardController.marcasFavoritas);
 
 router.get('/valorPMarca/:idUsuario', dashboardController.valorPMarca);
 
+router.get('/tipoVeiculoFavorito/:idUsuario', dashboardController.tipoVeiculoFavorito);
+
+router.get(`/valorPTipo/:idUsuario`, dashboardController.valorPTipo);
+
 module.exports = router;

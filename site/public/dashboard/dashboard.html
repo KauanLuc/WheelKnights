@@ -65,16 +65,23 @@
 
     <div class="graph_box">
         <div class="box">
+            <p class="caption">Quantidade de Miniaturas por Marca</p>
             <canvas id="chartMarcasFavoritas"></canvas>
         </div>
         <div class="box">
+            <p class="caption">Gastos por Marca (R$)</p>
             <canvas id="chartValorPMarca"></canvas>
+        </div>
+        <div class="box">
+            <p class="caption">Quantidade de Miniaturas por Tipo de Veículo</p>
+            <canvas id="chartTipoVeiculoFavorito"></canvas>
+        </div>
+        <div class="box">
+            <p class="caption">Gastos por Tipo de Veículo (R$)</p>
+            <canvas id="chartValorPTipo"></canvas>
         </div>
     </div>
 
-    
-
-    
 </body>
 </html>
 
@@ -323,9 +330,134 @@ function chartValorPMarca(data) {
     }
 });
 
-
 }
 
+function getTipoVeiculoFavorito(data){
+    fetch(`/dashboard/tipoVeiculoFavorito/${idUsuario}`)
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            chartTipoVeiculoFavorito(data);
+        })
+        .catch(error => console.error(`Erro ao obter os tipos de veículos favoritos: ${error}`));
+}
+
+function chartTipoVeiculoFavorito(data) {
+    console.log(data);
+    const labels = [];
+    const dataValues = [];
+
+    for (var i = 0; i < data.length; i++) {
+        const item = data[i];
+        labels.push(item['tipo']);
+        dataValues.push(item['quantidade']);
+    } 
+    
+    const ctx = document.getElementById('chartTipoVeiculoFavorito').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Quantidade de miniaturas',
+                data: dataValues,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            },
+            scales: {
+            x: {
+                ticks: {
+                    color: 'rgb(51, 49, 49)', 
+                }
+            },
+            y: {
+                ticks: {
+                    color: 'rgb(51, 49, 49)',
+                }
+            }
+        }
+        }
+    });    
+}
+
+function getValorPTipo(data){
+    fetch(`/dashboard/valorPTipo/${idUsuario}`)
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            chartValorPTipo(data);
+        })
+        .catch(error => console.error(`Erro ao obter os valores: ${error}`));
+}
+
+function chartValorPTipo(data){
+    console.log(data);
+    const labels = [];
+    const dataValues = [];
+
+    for (var i = 0; i < data.length; i++) {
+        const item = data[i];
+        labels.push(item['tipo']);
+        dataValues.push(item['quantidade']);
+    }
+
+    const ctx = document.getElementById('chartValorPTipo').getContext('2d');
+    const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Gasto no Tipo de Veículo (Em R$)',
+            data: dataValues,
+            backgroundColor: 'orange',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        const value = context.parsed.y;
+                        return 'R$' + value.toFixed(2);
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: 'rgb(51, 49, 49)', 
+                }
+            },
+            y: {
+                ticks: {
+                    color: 'rgb(51, 49, 49)',
+                }
+            }
+        }
+    }
+});    
+}
 
 getQtdMiniaturas();
 getEstimativaValor();
@@ -333,5 +465,7 @@ getMaxMiniatura();
 getMinMiniatura();
 getMarcasFavoritas();
 getValorPMarca();
+getTipoVeiculoFavorito();
+getValorPTipo();
 
 </script>

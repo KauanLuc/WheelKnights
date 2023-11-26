@@ -91,6 +91,32 @@ function valorPMarca(req, res) {
         });
 }
 
+function tipoVeiculoFavorito(req, res) {
+    const idUsuario = req.params.idUsuario;
+
+    dashboardModel.tipoVeiculoFavorito(idUsuario)
+        .then((result) => {
+            res.status(200).json(result);
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(500).json({ error: 'Erro interno do servidor'});
+        });
+}
+
+function valorPTipo(req, res) {
+    const idUsuario = req.params.idUsuario;
+
+    dashboardModel.valorPTipo(idUsuario)
+        .then((result) => {
+            res.status(200).json(result);
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(500).json({ error: 'Erro interno do servidor'});
+        });
+}
+
 module.exports = {
     mostrarColecao,
     qtdMiniaturas,
@@ -98,5 +124,7 @@ module.exports = {
     miniaturaMaisCara,
     miniaturaMaisBarata,
     marcasFavoritas,
-    valorPMarca
+    valorPMarca, 
+    tipoVeiculoFavorito,
+    valorPTipo
 };
