@@ -107,7 +107,6 @@ function entrar(){
             });
         } else {
             resposta.json().then(json => {
-            // Exibe o alerta com a mensagem de erro
             alert(json.error);
             });
         }
