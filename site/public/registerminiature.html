@@ -33,7 +33,8 @@
     <section>
 
         <div class="register_content">
-            
+
+            <div class="mensagem_status" id="mensagem_status"><button onclick="hideMsg()">OK</button></div>
             <h1>Registro de Miniaturas</h1><br>
 
                 <input type="text" placeholder="Modelo" class="inputForm" id="modelo">
@@ -143,6 +144,15 @@ function goAlbum() {
     window.location.href = `dashboard/miniAlbum.html?idUsuario=${idUsuario}`;
 }
 
+function showMsg(){
+    mensagem_status.style.display = 'block';
+    mensagem_status.style.display = 'flex';
+}
+
+function hideMsg(){
+    mensagem_status.style.display = 'none';
+}
+
 function cadastrar() {
     var fkColecaoVar = idUsuario;
     var fkMarcaVar = Number(marca.value);
@@ -151,7 +161,6 @@ function cadastrar() {
     var fkTipoVeiculoVar = Number(tipoVeiculo.value);
     var valorCompraVar = Number(valorCompra.value);
 
-    // Crie um objeto FormData
     var formData = new FormData();
     formData.append('fkColecao', fkColecaoVar);
     formData.append('fkMarca', fkMarcaVar);
@@ -166,7 +175,11 @@ function cadastrar() {
         modeloVar === "" ||
         fkTipoVeiculoVar === null
     ) {
-        alert("Marca, modelo e Tipo do veículo são obrigatórios");
+        mensagem_status.innerHTML = `
+        <p>Modelo, Marca e Tipo do veículo são obrigatórios</p>
+        <button onclick="hideMsg()">OK</button>
+    `;
+        showMsg();
         return false;
     }
 
@@ -178,9 +191,16 @@ function cadastrar() {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-            alert("Miniatura cadastrada com sucesso!");
+            mensagem_status.innerHTML = `
+                <p>Miniatura ${modeloVar} cadastrada com sucesso</p>
+                <button onclick="hideMsg()">OK</button>
+            `;
+            showMsg();
         } else {
-            throw "Houve um erro ao tentar realizar o cadastro da miniatura.";
+            mensagem_status.innerHTML = `
+            <p>Houve um erro ao tentar realizar o cadastro da miniatura.</p>
+            <button onclick="hideMsg()">OK</button>    
+        `;
         }
     })
     .catch(function(resposta) {
