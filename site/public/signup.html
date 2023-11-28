@@ -37,7 +37,7 @@
 
 const fields = document.querySelectorAll('.required');
 const spans = document.querySelectorAll('.span_required');
-const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 
 function setError(index){
     fields[index].style.border = '2px solid red';

@@ -9,7 +9,6 @@ function autenticar(userName, senha) {
     
     return database.executar(instrucao)
         .then(result => {
-            // Se houver algum resultado, retorna os dados do usuário incluindo o ID
             if (result.length > 0) {
                 const usuario = result[0];
                 return {
@@ -18,7 +17,6 @@ function autenticar(userName, senha) {
                     email: usuario.email
                 };
             } else {
-                // Se não houver resultados, retorna null
                 return null;
             }
         });
